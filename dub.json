@@ -1,0 +1,41 @@
+{
+    "name": "d-manifold",
+    "description": "D bindings for elalish/manifold — robust mesh boolean operations (CSG) via the official manifoldc C API. Static linking.",
+    "license": "Apache-2.0",
+    "authors": ["Alexander Shagarov"],
+
+    "sourcePaths": ["source"],
+    "importPaths": ["source"],
+
+    "preBuildCommands-posix": [
+        "cd \"$PACKAGE_DIR\" && git submodule update --init --recursive --quiet",
+        "cmake -S \"$PACKAGE_DIR\" -B \"$PACKAGE_DIR/build\" -DCMAKE_BUILD_TYPE=Release",
+        "cmake --build \"$PACKAGE_DIR/build\" -j --target manifoldc"
+    ],
+
+    "lflags-posix": [
+        "-L$PACKAGE_DIR/build/extern/manifold/bindings/c",
+        "-L$PACKAGE_DIR/build/extern/manifold/src",
+        "-L$PACKAGE_DIR/build/_deps/clipper2-build",
+        "--start-group",
+        "-lmanifoldc",
+        "-lmanifold",
+        "-lClipper2",
+        "--end-group",
+        "-lstdc++",
+        "-lm"
+    ],
+
+    "configurations": [
+        {
+            "name": "library",
+            "targetType": "staticLibrary"
+        },
+        {
+            "name": "boolean",
+            "targetType": "executable",
+            "targetName": "boolean",
+            "mainSourceFile": "examples/boolean.d"
+        }
+    ]
+}
