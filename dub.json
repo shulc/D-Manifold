@@ -12,8 +12,13 @@
         "cmake -S \"$PACKAGE_DIR\" -B \"$PACKAGE_DIR/build\" -DCMAKE_BUILD_TYPE=Release",
         "cmake --build \"$PACKAGE_DIR/build\" -j --target manifoldc"
     ],
+    "preBuildCommands-windows": [
+        "git -C \"$PACKAGE_DIR\" submodule update --init --recursive",
+        "cmake -S \"$PACKAGE_DIR\" -B \"$PACKAGE_DIR/build\"",
+        "cmake --build \"$PACKAGE_DIR/build\" --config Release --target manifoldc"
+    ],
 
-    "lflags-posix": [
+    "lflags-linux": [
         "-L$PACKAGE_DIR/build/extern/manifold/bindings/c",
         "-L$PACKAGE_DIR/build/extern/manifold/src",
         "-L$PACKAGE_DIR/build/_deps/clipper2-build",
@@ -25,6 +30,22 @@
         "-lstdc++",
         "-lm"
     ],
+    "lflags-osx": [
+        "-L$PACKAGE_DIR/build/extern/manifold/bindings/c",
+        "-L$PACKAGE_DIR/build/extern/manifold/src",
+        "-L$PACKAGE_DIR/build/_deps/clipper2-build",
+        "-lmanifoldc",
+        "-lmanifold",
+        "-lClipper2",
+        "-lc++",
+        "-lm"
+    ],
+    "lflags-windows": [
+        "$PACKAGE_DIR/build/extern/manifold/bindings/c/Release/manifoldc.lib",
+        "$PACKAGE_DIR/build/extern/manifold/src/Release/manifold.lib",
+        "$PACKAGE_DIR/build/_deps/clipper2-build/Release/Clipper2.lib"
+    ],
+    "dflags-windows": ["-mscrtlib=msvcrt"],
 
     "configurations": [
         {
