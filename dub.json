@@ -15,7 +15,7 @@
     "preBuildCommands-windows": [
         "git -C \"$PACKAGE_DIR\" submodule update --init --recursive",
         "cmake -S \"$PACKAGE_DIR\" -B \"$PACKAGE_DIR/build\"",
-        "cmake --build \"$PACKAGE_DIR/build\" --config Release --target manifoldc"
+        "cmake --build \"$PACKAGE_DIR/build\" --config Release"
     ],
 
     "lflags-linux": [
