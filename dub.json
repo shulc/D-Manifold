@@ -41,8 +41,8 @@
         "-lm"
     ],
     "lflags-windows": [
-        "$PACKAGE_DIR/build/extern/manifold/bindings/c/Release/manifoldc.lib",
-        "$PACKAGE_DIR/build/extern/manifold/src/Release/manifold.lib",
+        "$PACKAGE_DIR/build/extern/manifold/lib/Release/manifoldc.lib",
+        "$PACKAGE_DIR/build/extern/manifold/lib/Release/manifold.lib",
         "$PACKAGE_DIR/build/_deps/clipper2-build/Release/Clipper2.lib"
     ],
     "dflags-windows": ["-mscrtlib=msvcrt"],
