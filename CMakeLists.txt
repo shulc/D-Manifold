@@ -36,6 +36,13 @@ endfunction()
 
 add_subdirectory(extern/manifold EXCLUDE_FROM_ALL)
 
+# Pull manifoldc (+ its transitive deps: manifold, Clipper2) into the
+# default build on every generator.  Without this, EXCLUDE_FROM_ALL keeps
+# manifoldc out of ALL_BUILD on MSVC — cmake --build --config Release
+# (no --target) then exits 0 but never compiles the lib.
+add_custom_target(manifold_stack ALL)
+add_dependencies(manifold_stack manifoldc)
+
 # No custom shim — manifoldc is manifold's own official C API.
 # We just expose its include path so consumers can find manifoldc.h.
 # (The D binding generates no C++ code; it binds extern(C) directly.)
